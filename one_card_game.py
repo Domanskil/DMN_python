@@ -71,25 +71,29 @@ class Game(object):
         self.deck.deal(self.players, per_hand = 1)
            
         
+        totals = []
         for player in self.players:
-                print(player)
-                print(player.total)
+            print(player)
+            print(player.total)
+            totals.append(player.total)
+            
+            
+        totals.sort(reverse = True)
+        for player in self.players:
+            if player.total == totals[0]:
+                player.win()
+            else:
+                player.lose()
+        
+        
+        totals = []
+        # self.players.sort(player.total, reverse = True)
+        # print(self.players)
 
-            
-        # while len(self.players) > 1:
-            
-        #     #self.players.sort(player.card.value, reverse = True)
-            
-        #     for player in self.players:
-        #         print(player)
-        #         print(player.card.value)
 
-
-            
-            #     self.players.remove(player)
-            #     for player_1 in players:
-            #         if player.card.value >
-            
+        
+        for player in self.players:
+            player.clear()
 
 
 
