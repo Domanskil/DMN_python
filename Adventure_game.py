@@ -5,7 +5,7 @@ app = marimo.App(width="columns")
 
 
 @app.cell
-def _(score):
+def _():
     # # Simple game about traveling to different places. 
     # I want to make a grid of random place names, like a chess board. Than maybe a Dice roll for distance and choice of direction. 
     # Location will have random points 1-3, and after five rolls the player with most points wins. 
@@ -20,9 +20,9 @@ def _(score):
 
     #print(locations, end = '\n')
 
+    # Written by Domanskil
 
-
-    import gry
+    # import gry
     import random
 
     """
@@ -49,12 +49,17 @@ def _(score):
     """
 
 
-    class Grid(object):   ##=== wszystko w konstruktorze. Część emelentów będzie się zmieniać w trakcie, będzie trzeba wyjąć z __init__, np tiles chyba wyjmę.
-                          ##== Ale nie zrobie nowej klasy, tylko właściwość z setterem, żeby zmieniać ich reprezentację. vis i punkty, obecność gracza.
+
+    # Class Game (turn counter, player and score display), Locations (all shit happen here), Grid (just display), Player ( move -> locations update, score count)
 
 
-        def __init__(self):
-    
+    class Grid(object):   
+
+
+        def __init__(self, locations):
+
+            self.locations = locations
+
             """define alias for function get() to fit the commands on screen :)"""
 
             lg = self.locations.get 
@@ -81,6 +86,54 @@ def _(score):
             return(self.grid)
 
 
+
+
+
+    class Player(object):  # obrobić!!! ---  Pseudokod
+
+        def __init__(self, name, number, score =0):
+            self.score = score
+            self.name = name
+            self.number = number
+            self.location = '3c'
+
+    
+        @property 
+        def location(self):
+            self._location = location
+
+        @location.setter
+        def location(self, location):
+            self._location = location
+            return self._location
+
+        # def move(self, direction =  None, roll = 2):
+
+        #     while direction not in ["u", "d", "l", "r"]:
+        #         direction = input("""Which direction do you want to move?
+        #         "u" - up
+        #         "d" - down
+        #         "l" - left
+        #         "r" - right
+        #         ...?""")
+        #         return direction
+
+        #     if direction == "u":
+        #         self.loc = self.loci.locations[1][-roll * 5]  # to jest zła składnia
+        #     if direction == "d":
+        #         self.loc = self.loci.locations[1][+roll * 5]  # to jest zła składnia
+        #     if direction == "l":
+        #         self.loc = self.loci.locations[1][-roll]  # to jest zła składnia
+        #     if direction == "r":
+        #         self.loc = self.loci.locations[1][+roll]  # to jest zła składnia
+
+        #     return self.loc
+
+
+
+    class Locations(object):
+
+
         @property
         def tiles(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
 
@@ -88,8 +141,8 @@ def _(score):
             random.shuffle(values)
 
             # player = True
-    
-    
+
+
             if_p1 = "A" if p1 else " "
             if_p2 = "B" if p2 else " "
             if_p3 = "C" if p3 else " "
@@ -97,6 +150,7 @@ def _(score):
             __vis = vis
             tiles = []
             for i in values:
+                i = i if __vis else "X"
                 tiles.append([i, if_p1, if_p2, if_p3, if_p4, __vis])
 
             return tiles
@@ -108,12 +162,12 @@ def _(score):
             self.p2 = p2 if p2 else False
             self.p3 = p3 if p3 else False
             self.p4 = p4 if p4 else False
-            #= player. rozbić na 4, czy da się to jakoś inaczej? idę do roboty.
-    
+
+
 
         @property
         def locations(self):
-    
+
             loc_numbers = ['1','2','3','4','5']
             loc_letters = ['a','b','c','d','e']
             loc_list = []
@@ -123,79 +177,89 @@ def _(score):
 
             locations = dict(zip(loc_list, self.tiles))
 
-            return locations
+            return locations, loc_list
 
 
-    class Player(object):
 
-        def __init__(self):
-            self.score = score
+    class Game(object):
 
-
-        @property 
-        def location(self):
-            self._location = location
-
-        @location.setter
-        def location(self, location):
-            self._location = location
-            return self._location
-
-        def move(self, direction =  None, roll = 2):
-    
-            while direction not in ["u", "d", "l", "r"]:
-                direction = input("""Which direction do you want to move?
-                "u" - up
-                "d" - down
-                "l" - left
-                "r" - right
-                ...?""")
-                return direction
+        def __init__(self, players):
+            self.players = players
+            loci = Locations()
+            self.grid = Grid(loci.locations[0])
         
-            if direction == "u":
-                self.location = self.locations.loc_numbers[-2]  # to jest zła składnia
+     
+        def play(self):
+            round_count = 0
+            while round_count < 5:
+                #print(self.grid)
+                for player in self.players:
+                    print(player.name, "points:", player.score, player.location)
+
+            
+                print(self.grid)
+                round_count +=1
 
 
-    # test 002
 
-    
-
-    #edit 001
-    # test 002
-    # tatat
+    def main():
 
 
-        
-    
+       # loci = Locations()
 
 
-    # class Location(object):
 
-    # class Game(object):
-    return Grid, Player, random
+        players = []
+        num_players = None
+        while num_players not in range(2,4):
+            num_players = int(input("How many players are there? (2-4):"))
+        for i in range(1 , num_players+1):
+            player = Player(name = input(f"""What is the {i}. player's name?:"""), number = i)
+
+            players.append(player)
+
+        print(players)
+        game = Game(players)
+
+        again = None
+
+        while again != 'n':
+
+            game.play()
+            again = input("Do you want to play again? y/n: ")
+
+    main()
+    input("Press enter to exit")
+    return (random,)
 
 
 @app.cell
-def _(Grid, Player):
-    p1 = Player
-    p1.location = '2a'
-    grid = Grid()
-    p1 = Player
-    p1.location = '2a'
-    print(grid)
-    return grid, p1
-
-
-@app.cell
-def _(p1):
-    p1.move("r")
-    p1.location
+def _():
+    # game = Game()
     return
 
 
 @app.cell
-def _(grid):
-    grid.locations
+def _():
+    # p1 = Player
+    # p1.location = '2a'
+    # grid = Grid()
+    # # p1 = Player
+    # # p1.location = '2a'
+    # print(grid)
+    return
+
+
+@app.cell
+def _():
+    # p1.move("r")
+    # p1.location
+    return
+
+
+@app.cell
+def _():
+    # grid.locations
     return
 
 
