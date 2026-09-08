@@ -91,16 +91,18 @@ def _():
 
     class Player(object):  # obrobić!!! ---  Pseudokod
 
-        def __init__(self, name, number, score =0):
+        def __init__(self, name, number, score =0, location = None):
             self.score = score
             self.name = name
             self.number = number
-            self.location = '3c'
+            self._location = location
 
-    
+
         @property 
         def location(self):
-            self._location = location
+        
+            return self._location
+        
 
         @location.setter
         def location(self, location):
@@ -187,18 +189,20 @@ def _():
             self.players = players
             loci = Locations()
             self.grid = Grid(loci.locations[0])
-        
-     
+    
+ 
         def play(self):
             round_count = 0
             while round_count < 5:
                 #print(self.grid)
                 for player in self.players:
-                    print(player.name, "points:", player.score, player.location)
+                    print(player.name, "points:", player.score)
+                    player.location = '3c' #ok
+                    print(player.location)
 
-            
-                print(self.grid)
-                round_count +=1
+        
+                print(self.grid) #ok
+                round_count +=1 #ok
 
 
 
