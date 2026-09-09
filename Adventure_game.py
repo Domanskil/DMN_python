@@ -60,8 +60,12 @@ def _():
 
             self.locations = locations
 
+        def __str__(self):
+        
             """define alias for function get() to fit the commands on screen :)"""
 
+            #locations update!!!
+        
             lg = self.locations.get 
 
             self.grid = (f"""
@@ -82,7 +86,7 @@ def _():
                 |{lg('5a')[1]} {lg('5a')[2]} {lg('5a')[3]} {lg('5a')[4]}|{lg('5b')[1]} {lg('5b')[2]} {lg('5b')[3]} {lg('5b')[4]}|{lg('5c')[1]} {lg('5c')[2]} {lg('5c')[3]} {lg('5c')[4]}|{lg('5d')[1]} {lg('5d')[2]} {lg('5d')[3]} {lg('5d')[4]}|{lg('5e')[1]} {lg('5e')[2]} {lg('5e')[3]} {lg('5e')[4]}|
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
                 """)
-        def __str__(self):
+    
             return(self.grid)
 
 
@@ -91,18 +95,18 @@ def _():
 
     class Player(object):  # obrobić!!! ---  Pseudokod
 
-        def __init__(self, name, number, score =0, location = None):
+        def __init__(self, name, p_number, score =0, location = None):
             self.score = score
             self.name = name
-            self.number = number
+            self.p_number = f"p{p_number}"
             self._location = location
 
 
         @property 
         def location(self):
-        
+    
             return self._location
-        
+    
 
         @location.setter
         def location(self, location):
@@ -181,26 +185,37 @@ def _():
 
             return locations, loc_list
 
+    
+
 
 
     class Game(object):
 
         def __init__(self, players):
             self.players = players
-            loci = Locations()
-            self.grid = Grid(loci.locations[0])
+            self.loci = Locations()
+            self.grid = Grid(self.loci.locations[0])
+
+        def player_update(self):
+            for loc in self.loci.locations[0].keys(): #ok
+                for player in self.players:
+                    if loc == player.location:
+                        print(player.name, "found!")
     
- 
+    
+    
         def play(self):
             round_count = 0
             while round_count < 5:
-                #print(self.grid)
+            
                 for player in self.players:
                     print(player.name, "points:", player.score)
                     player.location = '3c' #ok
                     print(player.location)
 
-        
+                print(self.players)
+                print(self.loci.locations)
+                self.player_update()
                 print(self.grid) #ok
                 round_count +=1 #ok
 
@@ -209,7 +224,7 @@ def _():
     def main():
 
 
-       # loci = Locations()
+   
 
 
 
@@ -218,7 +233,7 @@ def _():
         while num_players not in range(2,4):
             num_players = int(input("How many players are there? (2-4):"))
         for i in range(1 , num_players+1):
-            player = Player(name = input(f"""What is the {i}. player's name?:"""), number = i)
+            player = Player(name = input(f"What is the {i}. player's name?:"), p_number = i)
 
             players.append(player)
 
@@ -234,7 +249,7 @@ def _():
 
     main()
     input("Press enter to exit")
-    return (random,)
+    return
 
 
 @app.cell
@@ -268,53 +283,53 @@ def _():
 
 
 @app.cell
-def _(random):
-    # ====================================   OLD GRID  ===============================================
-    # print(f"""
-    # |- - - -|- - - -|- - - -|- - - -|- - - -|
-    # |{locations.get('1a')}-    -|{locations.get('1b')}-    -|{locations.get('1c')}-    -|{locations.get('1d')}-    -|{locations.get('1e')}-    -|
-    # |{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|
-    values = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3]
-    # |{locations.get('2a')}-    -|{locations.get('2b')}-    -|{locations.get('2c')}-    -|{locations.get('2d')}-    -|{locations.get('2e')}-    -|
-    random.shuffle(values)
-    player = True
-    # |{locations.get('3a')}-    -|{locations.get('3b')}-    -|{locations.get('3c')}-    -|{locations.get('3d')}-    -|{locations.get('3e')}-    -|
-    p1_1 = 'A' if player else ' '
-    if_p1 = p1_1
-    # |{locations.get('4a')}-    -|{locations.get('4b')}-    -|{locations.get('4c')}-    -|{locations.get('4d')}-    -|{locations.get('4e')}-    -|
-    if_p2 = ' '
-    if_p3 = ' '
-    # |{locations.get('5a')}-    -|{locations.get('5b')}-    -|{locations.get('5c')}-    -|{locations.get('5d')}-    -|{locations.get('5e')}-    -|
-    if_p4 = ' '
-    vis = False
-    # """)
-    tiles = []
-    for i in values:
-    # ====================================  OLD TEST CODE  ============================================
-        tiles.append([i, if_p1, if_p2, if_p3, if_p4, vis])
-    # print(locations.keys())
-    loc_numbers = ['1', '2', '3', '4', '5']
-    # print(tiles)
-    loc_letters = ['a', 'b', 'c', 'd', 'e']
-    # print(tiles[0][0])
-    loc_list = []
-    # print(locations.get('1a')[0])
-    for i in loc_numbers:
-    # locations.get('1a')[0]
-        for j in loc_letters:
-    # lg('1a')[1:]
-            loc_list.append(i + j)
-    # ====================================  TEST CODE  ===============================================#
-    locations = dict(zip(loc_list, tiles))
-    lg = locations.get
-    # a = print(locations.get('1a')[0])
-    # b = locations.get('1a')[0]
-    # print(a == b)
-    # False
-    # print(a == print(b))
-    # 1
-    # True
-    print(f"\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('1a')[0]}-    -|{lg('1b')[0]}-    -|{lg('1c')[0]}-    -|{lg('1d')[0]}-    -|{lg('1e')[0]}-    -|\n            |{lg('1a')[1]} {lg('1a')[2]} {lg('1a')[3]} {lg('1a')[4]}|{lg('1b')[1]} {lg('1b')[2]} {lg('1b')[3]} {lg('1b')[4]}|{lg('1c')[1]} {lg('1c')[2]} {lg('1c')[3]} {lg('1c')[4]}|{lg('1d')[1]} {lg('1d')[2]} {lg('1d')[3]} {lg('1d')[4]}|{lg('1e')[1]} {lg('1e')[2]} {lg('1e')[3]} {lg('1e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('2a')[0]}-    -|{lg('2b')[0]}-    -|{lg('2c')[0]}-    -|{lg('2d')[0]}-    -|{lg('2e')[0]}-    -|\n            |{lg('2a')[1]} {lg('2a')[2]} {lg('2a')[3]} {lg('2a')[4]}|{lg('2b')[1]} {lg('2b')[2]} {lg('2b')[3]} {lg('2b')[4]}|{lg('2c')[1]} {lg('2c')[2]} {lg('2c')[3]} {lg('2c')[4]}|{lg('2d')[1]} {lg('2d')[2]} {lg('2d')[3]} {lg('2d')[4]}|{lg('2e')[1]} {lg('2e')[2]} {lg('2e')[3]} {lg('2e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('3a')[0]}-    -|{lg('3b')[0]}-    -|{lg('3c')[0]}-    -|{lg('3d')[0]}-    -|{lg('3e')[0]}-    -|\n            |{lg('3a')[1]} {lg('3a')[2]} {lg('3a')[3]} {lg('3a')[4]}|{lg('3b')[1]} {lg('3b')[2]} {lg('3b')[3]} {lg('3b')[4]}|{lg('3c')[1]} {lg('3c')[2]} {lg('3c')[3]} {lg('3c')[4]}|{lg('3d')[1]} {lg('3d')[2]} {lg('3d')[3]} {lg('3d')[4]}|{lg('3e')[1]} {lg('3e')[2]} {lg('3e')[3]} {lg('3e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('4a')[0]}-    -|{lg('4b')[0]}-    -|{lg('4c')[0]}-    -|{lg('4d')[0]}-    -|{lg('4e')[0]}-    -|\n            |{lg('4a')[1]} {lg('4a')[2]} {lg('4a')[3]} {lg('4a')[4]}|{lg('4b')[1]} {lg('4b')[2]} {lg('4b')[3]} {lg('4b')[4]}|{lg('4c')[1]} {lg('4c')[2]} {lg('4c')[3]} {lg('4c')[4]}|{lg('4d')[1]} {lg('4d')[2]} {lg('4d')[3]} {lg('4d')[4]}|{lg('4e')[1]} {lg('4e')[2]} {lg('4e')[3]} {lg('4e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('5a')[0]}-    -|{lg('5b')[0]}-    -|{lg('5c')[0]}-    -|{lg('5d')[0]}-    -|{lg('5e')[0]}-    -|\n            |{lg('5a')[1]} {lg('5a')[2]} {lg('5a')[3]} {lg('5a')[4]}|{lg('5b')[1]} {lg('5b')[2]} {lg('5b')[3]} {lg('5b')[4]}|{lg('5c')[1]} {lg('5c')[2]} {lg('5c')[3]} {lg('5c')[4]}|{lg('5d')[1]} {lg('5d')[2]} {lg('5d')[3]} {lg('5d')[4]}|{lg('5e')[1]} {lg('5e')[2]} {lg('5e')[3]} {lg('5e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            ")
+def _():
+    # # ====================================   OLD GRID  ===============================================
+    # # print(f"""
+    # # |- - - -|- - - -|- - - -|- - - -|- - - -|
+    # # |{locations.get('1a')}-    -|{locations.get('1b')}-    -|{locations.get('1c')}-    -|{locations.get('1d')}-    -|{locations.get('1e')}-    -|
+    # # |{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|{if_p1} {if_p2} {if_p3} {if_p4}|
+    # values = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3]
+    # # |{locations.get('2a')}-    -|{locations.get('2b')}-    -|{locations.get('2c')}-    -|{locations.get('2d')}-    -|{locations.get('2e')}-    -|
+    # random.shuffle(values)
+    # player = True
+    # # |{locations.get('3a')}-    -|{locations.get('3b')}-    -|{locations.get('3c')}-    -|{locations.get('3d')}-    -|{locations.get('3e')}-    -|
+    # p1_1 = 'A' if player else ' '
+    # if_p1 = p1_1
+    # # |{locations.get('4a')}-    -|{locations.get('4b')}-    -|{locations.get('4c')}-    -|{locations.get('4d')}-    -|{locations.get('4e')}-    -|
+    # if_p2 = ' '
+    # if_p3 = ' '
+    # # |{locations.get('5a')}-    -|{locations.get('5b')}-    -|{locations.get('5c')}-    -|{locations.get('5d')}-    -|{locations.get('5e')}-    -|
+    # if_p4 = ' '
+    # vis = False
+    # # """)
+    # tiles = []
+    # for i in values:
+    # # ====================================  OLD TEST CODE  ============================================
+    #     tiles.append([i, if_p1, if_p2, if_p3, if_p4, vis])
+    # # print(locations.keys())
+    # loc_numbers = ['1', '2', '3', '4', '5']
+    # # print(tiles)
+    # loc_letters = ['a', 'b', 'c', 'd', 'e']
+    # # print(tiles[0][0])
+    # loc_list = []
+    # # print(locations.get('1a')[0])
+    # for i in loc_numbers:
+    # # locations.get('1a')[0]
+    #     for j in loc_letters:
+    # # lg('1a')[1:]
+    #         loc_list.append(i + j)
+    # # ====================================  TEST CODE  ===============================================#
+    # locations = dict(zip(loc_list, tiles))
+    # lg = locations.get
+    # # a = print(locations.get('1a')[0])
+    # # b = locations.get('1a')[0]
+    # # print(a == b)
+    # # False
+    # # print(a == print(b))
+    # # 1
+    # # True
+    # print(f"\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('1a')[0]}-    -|{lg('1b')[0]}-    -|{lg('1c')[0]}-    -|{lg('1d')[0]}-    -|{lg('1e')[0]}-    -|\n            |{lg('1a')[1]} {lg('1a')[2]} {lg('1a')[3]} {lg('1a')[4]}|{lg('1b')[1]} {lg('1b')[2]} {lg('1b')[3]} {lg('1b')[4]}|{lg('1c')[1]} {lg('1c')[2]} {lg('1c')[3]} {lg('1c')[4]}|{lg('1d')[1]} {lg('1d')[2]} {lg('1d')[3]} {lg('1d')[4]}|{lg('1e')[1]} {lg('1e')[2]} {lg('1e')[3]} {lg('1e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('2a')[0]}-    -|{lg('2b')[0]}-    -|{lg('2c')[0]}-    -|{lg('2d')[0]}-    -|{lg('2e')[0]}-    -|\n            |{lg('2a')[1]} {lg('2a')[2]} {lg('2a')[3]} {lg('2a')[4]}|{lg('2b')[1]} {lg('2b')[2]} {lg('2b')[3]} {lg('2b')[4]}|{lg('2c')[1]} {lg('2c')[2]} {lg('2c')[3]} {lg('2c')[4]}|{lg('2d')[1]} {lg('2d')[2]} {lg('2d')[3]} {lg('2d')[4]}|{lg('2e')[1]} {lg('2e')[2]} {lg('2e')[3]} {lg('2e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('3a')[0]}-    -|{lg('3b')[0]}-    -|{lg('3c')[0]}-    -|{lg('3d')[0]}-    -|{lg('3e')[0]}-    -|\n            |{lg('3a')[1]} {lg('3a')[2]} {lg('3a')[3]} {lg('3a')[4]}|{lg('3b')[1]} {lg('3b')[2]} {lg('3b')[3]} {lg('3b')[4]}|{lg('3c')[1]} {lg('3c')[2]} {lg('3c')[3]} {lg('3c')[4]}|{lg('3d')[1]} {lg('3d')[2]} {lg('3d')[3]} {lg('3d')[4]}|{lg('3e')[1]} {lg('3e')[2]} {lg('3e')[3]} {lg('3e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('4a')[0]}-    -|{lg('4b')[0]}-    -|{lg('4c')[0]}-    -|{lg('4d')[0]}-    -|{lg('4e')[0]}-    -|\n            |{lg('4a')[1]} {lg('4a')[2]} {lg('4a')[3]} {lg('4a')[4]}|{lg('4b')[1]} {lg('4b')[2]} {lg('4b')[3]} {lg('4b')[4]}|{lg('4c')[1]} {lg('4c')[2]} {lg('4c')[3]} {lg('4c')[4]}|{lg('4d')[1]} {lg('4d')[2]} {lg('4d')[3]} {lg('4d')[4]}|{lg('4e')[1]} {lg('4e')[2]} {lg('4e')[3]} {lg('4e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            |{lg('5a')[0]}-    -|{lg('5b')[0]}-    -|{lg('5c')[0]}-    -|{lg('5d')[0]}-    -|{lg('5e')[0]}-    -|\n            |{lg('5a')[1]} {lg('5a')[2]} {lg('5a')[3]} {lg('5a')[4]}|{lg('5b')[1]} {lg('5b')[2]} {lg('5b')[3]} {lg('5b')[4]}|{lg('5c')[1]} {lg('5c')[2]} {lg('5c')[3]} {lg('5c')[4]}|{lg('5d')[1]} {lg('5d')[2]} {lg('5d')[3]} {lg('5d')[4]}|{lg('5e')[1]} {lg('5e')[2]} {lg('5e')[3]} {lg('5e')[4]}|\n            |- - - -|- - - -|- - - -|- - - -|- - - -|\n            ")
     return
 
 
