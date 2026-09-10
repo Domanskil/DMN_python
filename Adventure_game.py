@@ -55,17 +55,25 @@ def _():
 
     class Grid(object):   
 
+        def __init__(self, locations = None):
+            self._locations = locations
+    
+        @property
+        def locations(self):
 
-        def __init__(self, locations):
+            return self._locations
 
-            self.locations = locations
-
+        @locations.setter
+        def locations(self, locations):
+            self._locations = locations
+            return self._location
+    
         def __str__(self):
-        
+    
             """define alias for function get() to fit the commands on screen :)"""
 
             #locations update!!!
-        
+    
             lg = self.locations.get 
 
             self.grid = (f"""
@@ -86,7 +94,7 @@ def _():
                 |{lg('5a')[1]} {lg('5a')[2]} {lg('5a')[3]} {lg('5a')[4]}|{lg('5b')[1]} {lg('5b')[2]} {lg('5b')[3]} {lg('5b')[4]}|{lg('5c')[1]} {lg('5c')[2]} {lg('5c')[3]} {lg('5c')[4]}|{lg('5d')[1]} {lg('5d')[2]} {lg('5d')[3]} {lg('5d')[4]}|{lg('5e')[1]} {lg('5e')[2]} {lg('5e')[3]} {lg('5e')[4]}|
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
                 """)
-    
+
             return(self.grid)
 
 
@@ -104,9 +112,9 @@ def _():
 
         @property 
         def location(self):
-    
+
             return self._location
-    
+
 
         @location.setter
         def location(self, location):
@@ -141,7 +149,7 @@ def _():
 
 
         @property
-        def tiles(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
+        def locations(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
 
             values = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3]
             random.shuffle(values)
@@ -159,10 +167,19 @@ def _():
                 i = i if __vis else "X"
                 tiles.append([i, if_p1, if_p2, if_p3, if_p4, __vis])
 
-            return tiles
+            loc_numbers = ['1','2','3','4','5']
+            loc_letters = ['a','b','c','d','e']
+            loc_list = []
+            for i in loc_numbers:
+                for j in loc_letters:
+                    loc_list.append(i+j)
 
-        @tiles.setter
-        def tiles(self, p1, p2, p3, p4, vis):
+            locations = dict(zip(loc_list, tiles))
+
+            return locations, loc_list
+
+        @locations.setter
+        def locations(self, p1, p2, p3, p4, vis):
             self.__vis = vis
             self.p1 = p1 if p1 else False
             self.p2 = p2 if p2 else False
@@ -171,21 +188,13 @@ def _():
 
 
 
-        @property
-        def locations(self):
-
-            loc_numbers = ['1','2','3','4','5']
-            loc_letters = ['a','b','c','d','e']
-            loc_list = []
-            for i in loc_numbers:
-                for j in loc_letters:
-                    loc_list.append(i+j)
-
-            locations = dict(zip(loc_list, self.tiles))
-
-            return locations, loc_list
-
     
+
+        
+
+        
+
+
 
 
 
@@ -200,21 +209,23 @@ def _():
             for loc in self.loci.locations[0].keys(): #ok
                 for player in self.players:
                     if loc == player.location:
-                        print(player.name, "found!")
-    
-    
-    
+                        print(player.name, "found!", loc)
+                        self.loci.locations[0][loc][5] = True
+                        # update inaczej!!!
+                        print(self.loci.locations[0][loc][5])
+
+
         def play(self):
             round_count = 0
             while round_count < 5:
-            
+        
                 for player in self.players:
                     print(player.name, "points:", player.score)
                     player.location = '3c' #ok
                     print(player.location)
 
-                print(self.players)
-                print(self.loci.locations)
+                # print(self.players)
+                # print(self.loci.locations)
                 self.player_update()
                 print(self.grid) #ok
                 round_count +=1 #ok
@@ -249,6 +260,58 @@ def _():
 
     main()
     input("Press enter to exit")
+    return
+
+
+@app.cell
+def _():
+    # class Locations(object):
+
+
+    #     @property
+    #     def tiles(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
+
+    #         values = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3]
+    #         random.shuffle(values)
+
+    #         # player = True
+
+
+    #         if_p1 = "A" if p1 else " "
+    #         if_p2 = "B" if p2 else " "
+    #         if_p3 = "C" if p3 else " "
+    #         if_p4 = "D" if p4 else " "
+    #         __vis = vis
+    #         tiles = []
+    #         for i in values:
+    #             i = i if __vis else "X"
+    #             tiles.append([i, if_p1, if_p2, if_p3, if_p4, __vis])
+
+    #         return tiles
+
+    #     @tiles.setter
+    #     def tiles(self, p1, p2, p3, p4, vis):
+    #         self.__vis = vis
+    #         self.p1 = p1 if p1 else False
+    #         self.p2 = p2 if p2 else False
+    #         self.p3 = p3 if p3 else False
+    #         self.p4 = p4 if p4 else False
+
+
+
+    #     @property
+    #     def locations(self):
+
+    #         loc_numbers = ['1','2','3','4','5']
+    #         loc_letters = ['a','b','c','d','e']
+    #         loc_list = []
+    #         for i in loc_numbers:
+    #             for j in loc_letters:
+    #                 loc_list.append(i+j)
+
+    #         locations = dict(zip(loc_list, self.tiles))
+
+    #         return locations, loc_list
     return
 
 
