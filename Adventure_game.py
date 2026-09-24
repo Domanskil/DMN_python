@@ -5,7 +5,7 @@ app = marimo.App(width="columns")
 
 
 @app.cell
-def _(Grid, values):
+def _(Grid, locations, values):
     # # Simple game about traveling to different places. 
     # I want to make a grid of random place names, like a chess board. Than maybe a Dice roll for distance and choice of direction. 
     # Location will have random points 1-3, and after five rolls the player with most points wins. 
@@ -26,26 +26,20 @@ def _(Grid, values):
     import random
 
     """
-    Location - grid 5x5 dictionary {location:value}
-        values = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3]
-        25pcs, 15x1, 6x2, 4x3.
-        locations = {1-5, a-e : random value}
-        no dict. Wkurwiony jestem i nie umiem tego rozgryźć. Najpierw wymyśl, co dokładnie gra ma robić. Potem będzie łatwiej
-        wymyśleć, jak to ma robić.
+    Od początku.
 
-        Hidden reps - after discovery - remain visible
-        Random points
-        Move options - grid
-        More players at the same spot <-nested dict?
+    Klasa Locations = Stół, siatka, podłoga. Współrzędne, na których układane są kafelki gry i po których poruszają się gracze. 
+    [coord][tile][if_player]
+    Tutaj aktualizowana i rysowana co rundę jest siatka gry. 
+    Kafelek zostaje odwrócony i taki pozostaje, kiedy przyjdzie gracz. 
+    Obecność gracza odwracalna-tylko do wyświetlania.
 
 
+    Kafelek wyświetlany i obracany raz przez pierwszego gracza. 
 
-    Player - depend on location
-        points
-        Dice roll - > move direction ->
-        Score update    
+    Gracz - pozycja, punkty, ruch. Zwraca zmienną, która modyfikuje wartość [if_player]. 
 
-    Round count
+
 
     """
 
@@ -153,7 +147,7 @@ def _(Grid, values):
             values = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3]
             random.shuffle(values)
 
-        
+    
 
 
 
@@ -188,7 +182,7 @@ def _(Grid, values):
 
 
 
-    
+
     class Locations(object): 
         """game grid"""
 
@@ -196,14 +190,31 @@ def _(Grid, values):
             locations = []
             loc_numbers = ['1','2','3','4','5']
             loc_letters = ['a','b','c','d','e']
-        
+    
             for i in loc_numbers:
                 for j in loc_letters:
                     locations.append(i+j)
 
             return locations
 
+        def tile_flip(self, tile):
+            tile._vis = True
 
+        def show_player(self, tile):
+            for player in self.players:
+                if player.location == tile.loc:
+                    tile.p_pnum = True
+                
+        def hide_player(self, tile):
+            tile.p_pnum = False
+
+    
+        def player_present(self):
+            for player in self.players:
+                for tile in locations.tiles:
+                    if player.location == tile.loc: #na przykład tak. Jeszcze nie ma tej zmiennej
+                        tile_flip(tile)
+                        show_player(tile)
 
 
 
