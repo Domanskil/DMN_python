@@ -95,23 +95,23 @@ def _(i, locations):
             self.p2 = p2
             self.p3 = p3
             self.p4 = p4
-       
+   
             self.if_p1 = "A"
             self.if_p2 = "B"
             self.if_p3 = "C"
             self.if_p4 = "D"
-        
-        def __str__(self):
-            self.i = i if self._vis else "X"
-            self.if_p1 = "A" if self.p1 else " "
-            self.if_p2 = "B" if self.p2 else " "
-            self.if_p3 = "C" if self.p3 else " "
-            self.if_p4 = "D" if self.p4 else " "
-            return self.i, self.if_p1, self.if_p2, self.if_p3, self.if_p4
+    
+        # def __str__(self):
+        #     self.i = i if self._vis else "X"
+        #     self.if_p1 = "A" if self.p1 else " "
+        #     self.if_p2 = "B" if self.p2 else " "
+        #     self.if_p3 = "C" if self.p3 else " "
+        #     self.if_p4 = "D" if self.p4 else " "
+        #     return self.i, self.if_p1, self.if_p2, self.if_p3, self.if_p4
 
         @property
         def tile(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
-            tile = [i, self.if_p1, self.if_p2, self.if_p3, self.if_p4, self._vis]
+            tile = [i, self.p1, self.p2, self.p3, self.p4, self._vis]
             return tile
 
         @tile.setter
@@ -162,7 +162,7 @@ def _(i, locations):
             self.loci = []
             for num in range(0, 25):
                 self.loci.append([locations[num], tiles[num]])
-        
+    
         def tile_flip(self, tile):
             tile._vis = True
 
@@ -170,7 +170,7 @@ def _(i, locations):
             for player in self.players:
                 if player.location == tile.loc:
                     tile.p_pnum = True
-    
+
         def hide_player(self, tile):
             tile.p_pnum = False
 
@@ -187,15 +187,17 @@ def _(i, locations):
         def grid(self):
 
             lc = self.loci
+        
 
+        
             grid = (f"""
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
-                |{print(lc[0][0])}-{lc[0][1].i}  -|{lc[1][0]}-{lc[1][1].i}  -|{lc[2][0]}-{lc[2][1].i}  -|{lc[3][0]}-{lc[3][1].i}  -|{lc[4][0]}-{lc[4][1].i}  -| 
-                |{lc[0][1].if_p1}-{lc[0][1].p2}-{lc[0][1].p3}-{lc[0][1].p4}|
+                |{lc[0][0]}-{lc[0][1].i}  -|{lc[1][0]}-{lc[1][1].i}  -|{lc[2][0]}-{lc[2][1].i}  -|{lc[3][0]}-{lc[3][1].i}  -|{lc[4][0]}-{lc[4][1].i}  -| 
+                |{' ' if not lc[0][1].p1 else lc[0][1]}-{' ' if not lc[0][1].p2 else lc[0][1]}-{' ' if not lc[0][1].p3 else lc[0][1]}-{' ' if not lc[0][1].p4 else lc[0][1]}|{' ' if not lc[1][1].p1 else lc[1][1]}-{' ' if not lc[1][1].p2 else lc[1][1]}-{' ' if not lc[1][1].p3 else lc[1][1]}-{' ' if not lc[1][1].p4 else lc[1][1]}|
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
-    
+
             """)
-                    
+                
             return grid
 
 
@@ -232,10 +234,10 @@ def _(i, locations):
                 print(self.locations.grid)
                 self.locations.loci[0][1].vis = True
                 round_count +=1 #ok
-            
+        
                 elele = False
                 ele = 'puste' if elele == False else 'print 5'
-            
+        
                 print(ele)
                 elele = True
                 print(ele)
