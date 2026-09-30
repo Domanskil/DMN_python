@@ -96,11 +96,11 @@ def _(i, locations):
             self.p3 = p3
             self.p4 = p4
    
-            self.if_p1 = "A"
-            self.if_p2 = "B"
-            self.if_p3 = "C"
-            self.if_p4 = "D"
-    
+            # self.if_p1 = "A"
+            # self.if_p2 = "B"
+            # self.if_p3 = "C"
+            # self.if_p4 = "D"
+
         # def __str__(self):
         #     self.i = i if self._vis else "X"
         #     self.if_p1 = "A" if self.p1 else " "
@@ -162,7 +162,7 @@ def _(i, locations):
             self.loci = []
             for num in range(0, 25):
                 self.loci.append([locations[num], tiles[num]])
-    
+
         def tile_flip(self, tile):
             tile._vis = True
 
@@ -187,17 +187,29 @@ def _(i, locations):
         def grid(self):
 
             lc = self.loci
-        
-
-        
+    
+    # zmien else po warunku i spacji na literę. tu jest tylko reprezentacja!!! :) będzie pięknie.
+    
             grid = (f"""
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
                 |{lc[0][0]}-{lc[0][1].i}  -|{lc[1][0]}-{lc[1][1].i}  -|{lc[2][0]}-{lc[2][1].i}  -|{lc[3][0]}-{lc[3][1].i}  -|{lc[4][0]}-{lc[4][1].i}  -| 
-                |{' ' if not lc[0][1].p1 else lc[0][1]}-{' ' if not lc[0][1].p2 else lc[0][1]}-{' ' if not lc[0][1].p3 else lc[0][1]}-{' ' if not lc[0][1].p4 else lc[0][1]}|{' ' if not lc[1][1].p1 else lc[1][1]}-{' ' if not lc[1][1].p2 else lc[1][1]}-{' ' if not lc[1][1].p3 else lc[1][1]}-{' ' if not lc[1][1].p4 else lc[1][1]}|
+                |{' ' if not lc[0][1].p1 else "A"}-{' ' if not lc[0][1].p2 else "B"}-{' ' if not lc[0][1].p3 else "C"}-{' ' if not lc[0][1].p4 else "D"}|{' ' if not lc[1][1].p1 else lc[1][1]}-{' ' if not lc[1][1].p2 else lc[1][1]}-{' ' if not lc[1][1].p3 else lc[1][1]}-{' ' if not lc[1][1].p4 else lc[1][1]}|{' ' if not lc[2][1].p1 else lc[2][1]}-{' ' if not lc[2][1].p2 else lc[2][1]}-{' ' if not lc[2][1].p3 else lc[2][1]}-{' ' if not lc[2][1].p4 else lc[2][1]}|{' ' if not lc[3][1].p1 else lc[3][1]}-{' ' if not lc[3][1].p2 else lc[3][1]}-{' ' if not lc[3][1].p3 else lc[3][1]}-{' ' if not lc[3][1].p4 else lc[3][1]}|{' ' if not lc[4][1].p1 else lc[4][1]}-{' ' if not lc[4][1].p2 else lc[4][1]}-{' ' if not lc[4][1].p3 else lc[4][1]}-{' ' if not lc[4][1].p4 else lc[4][1]}|
+                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |{lc[5][0]}-{lc[5][1].i}  -|{lc[6][0]}-{lc[6][1].i}  -|{lc[7][0]}-{lc[7][1].i}  -|{lc[8][0]}-{lc[8][1].i}  -|{lc[9][0]}-{lc[9][1].i}  -| 
+                |{' ' if not lc[5][1].p1 else lc[5][1]}-{' ' if not lc[5][1].p2 else lc[5][1]}-{' ' if not lc[5][1].p3 else lc[5][1]}-{' ' if not lc[5][1].p4 else lc[5][1]}|{' ' if not lc[6][1].p1 else lc[6][1]}-{' ' if not lc[6][1].p2 else lc[6][1]}-{' ' if not lc[6][1].p3 else lc[6][1]}-{' ' if not lc[6][1].p4 else lc[6][1]}|{' ' if not lc[7][1].p1 else lc[7][1]}-{' ' if not lc[7][1].p2 else lc[7][1]}-{' ' if not lc[7][1].p3 else lc[7][1]}-{' ' if not lc[7][1].p4 else lc[7][1]}|{' ' if not lc[8][1].p1 else lc[8][1]}-{' ' if not lc[8][1].p2 else lc[8][1]}-{' ' if not lc[8][1].p3 else lc[8][1]}-{' ' if not lc[8][1].p4 else lc[8][1]}|{' ' if not lc[9][1].p1 else lc[9][1]}-{' ' if not lc[9][1].p2 else lc[9][1]}-{' ' if not lc[9][1].p3 else lc[9][1]}-{' ' if not lc[9][1].p4 else lc[9][1]}|
+                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |{lc[10][0]}-{lc[10][1].i}  -|{lc[11][0]}-{lc[11][1].i}  -|{lc[12][0]}-{lc[12][1].i}  -|{lc[13][0]}-{lc[13][1].i}  -|{lc[14][0]}-{lc[14][1].i}  -| 
+                |{' ' if not lc[10][1].p1 else lc[10][1]}-{' ' if not lc[10][1].p2 else lc[10][1]}-{' ' if not lc[10][1].p3 else lc[10][1]}-{' ' if not lc[10][1].p4 else lc[10][1]}|{' ' if not lc[11][1].p1 else lc[11][1]}-{' ' if not lc[11][1].p2 else lc[11][1]}-{' ' if not lc[11][1].p3 else lc[11][1]}-{' ' if not lc[11][1].p4 else lc[11][1]}|{' ' if not lc[12][1].p1 else lc[12][1]}-{' ' if not lc[12][1].p2 else lc[12][1]}-{' ' if not lc[12][1].p3 else lc[12][1]}-{' ' if not lc[12][1].p4 else lc[12][1]}|{' ' if not lc[13][1].p1 else lc[13][1]}-{' ' if not lc[13][1].p2 else lc[13][1]}-{' ' if not lc[13][1].p3 else lc[13][1]}-{' ' if not lc[13][1].p4 else lc[13][1]}|{' ' if not lc[14][1].p1 else lc[14][1]}-{' ' if not lc[14][1].p2 else lc[14][1]}-{' ' if not lc[14][1].p3 else lc[14][1]}-{' ' if not lc[14][1].p4 else lc[14][1]}|
+                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |{lc[15][0]}-{lc[15][1].i}  -|{lc[16][0]}-{lc[16][1].i}  -|{lc[17][0]}-{lc[17][1].i}  -|{lc[18][0]}-{lc[18][1].i}  -|{lc[19][0]}-{lc[19][1].i}  -| 
+                |{' ' if not lc[15][1].p1 else lc[15][1]}-{' ' if not lc[15][1].p2 else lc[15][1]}-{' ' if not lc[15][1].p3 else lc[15][1]}-{' ' if not lc[15][1].p4 else lc[15][1]}|{' ' if not lc[16][1].p1 else lc[16][1]}-{' ' if not lc[16][1].p2 else lc[16][1]}-{' ' if not lc[16][1].p3 else lc[16][1]}-{' ' if not lc[16][1].p4 else lc[16][1]}|{' ' if not lc[17][1].p1 else lc[17][1]}-{' ' if not lc[17][1].p2 else lc[17][1]}-{' ' if not lc[17][1].p3 else lc[17][1]}-{' ' if not lc[17][1].p4 else lc[17][1]}|{' ' if not lc[18][1].p1 else lc[18][1]}-{' ' if not lc[18][1].p2 else lc[18][1]}-{' ' if not lc[18][1].p3 else lc[18][1]}-{' ' if not lc[18][1].p4 else lc[18][1]}|{' ' if not lc[19][1].p1 else lc[19][1]}-{' ' if not lc[19][1].p2 else lc[19][1]}-{' ' if not lc[19][1].p3 else lc[19][1]}-{' ' if not lc[19][1].p4 else lc[19][1]}|
+                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |{lc[20][0]}-{lc[20][1].i}  -|{lc[21][0]}-{lc[21][1].i}  -|{lc[22][0]}-{lc[22][1].i}  -|{lc[23][0]}-{lc[23][1].i}  -|{lc[24][0]}-{lc[24][1].i}  -| 
+                |{' ' if not lc[20][1].p1 else lc[20][1]}-{' ' if not lc[20][1].p2 else lc[20][1]}-{' ' if not lc[20][1].p3 else lc[20][1]}-{' ' if not lc[20][1].p4 else lc[20][1]}|{' ' if not lc[21][1].p1 else lc[21][1]}-{' ' if not lc[21][1].p2 else lc[21][1]}-{' ' if not lc[21][1].p3 else lc[21][1]}-{' ' if not lc[21][1].p4 else lc[21][1]}|{' ' if not lc[22][1].p1 else lc[22][1]}-{' ' if not lc[22][1].p2 else lc[22][1]}-{' ' if not lc[22][1].p3 else lc[22][1]}-{' ' if not lc[22][1].p4 else lc[22][1]}|{' ' if not lc[23][1].p1 else lc[23][1]}-{' ' if not lc[23][1].p2 else lc[23][1]}-{' ' if not lc[23][1].p3 else lc[23][1]}-{' ' if not lc[23][1].p4 else lc[23][1]}|{' ' if not lc[24][1].p1 else lc[24][1]}-{' ' if not lc[24][1].p2 else lc[24][1]}-{' ' if not lc[24][1].p3 else lc[24][1]}-{' ' if not lc[24][1].p4 else lc[24][1]}|
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
 
             """)
-                
+            
             return grid
 
 
@@ -234,10 +246,10 @@ def _(i, locations):
                 print(self.locations.grid)
                 self.locations.loci[0][1].vis = True
                 round_count +=1 #ok
-        
+    
                 elele = False
                 ele = 'puste' if elele == False else 'print 5'
-        
+    
                 print(ele)
                 elele = True
                 print(ele)
