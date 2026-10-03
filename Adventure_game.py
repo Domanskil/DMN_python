@@ -5,7 +5,7 @@ app = marimo.App(width="columns")
 
 
 @app.cell
-def _(i, locations, show_player):
+def _(i):
     # # Simple game about traveling to different places. 
     # I want to make a grid of random place names, like a chess board. Than maybe a Dice roll for distance and choice of direction. 
     # Location will have random points 1-3, and after five rolls the player with most points wins. 
@@ -96,7 +96,7 @@ def _(i, locations, show_player):
             self.p3 = p3
             self.p4 = p4
    
-        
+    
 
         @property
         def tile(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
@@ -111,10 +111,17 @@ def _(i, locations, show_player):
             self.p3 = p3
             self.p4 = p4
 
-        def tile_flip(self, tile):
-            tile.vis = True
+        def tile_flip(self):
+            self.vis = True
 
-        
+
+        # def show_player(self):
+        #     self.p1 = p1
+        #     self.p2 = p2
+        #     self.p3 = p3
+        #     self.p4 = p4
+
+
     # Ściąga z czata
     # class Element:
     #     def __init__(self, hp):
@@ -163,9 +170,9 @@ def _(i, locations, show_player):
 
             lc = self.loci
 
-        
+    
 
-        
+    
     # Zmień reprezentację 'i' warunek i vis. 
 
             grid = (f"""
@@ -187,7 +194,7 @@ def _(i, locations, show_player):
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
 
             """)
-    
+
             return grid
 
 
@@ -208,48 +215,49 @@ def _(i, locations, show_player):
         #                 # update inaczej!!!
         #                 print(self.loci.locations[0][loc])
 
-    
+
 
         def show_players(self):
             for player in self.players:
-                print(player.location)
                 for location in self.locations.loci:
-                    print(location[0][0])
                     if (player.location) == (location[0]):
-                        print(player.location + 'coś')
-                        location.loci[1].flip_tile() # zbliżam się do tego :)
-                        print('coś')
+                        location[1].tile_flip()
+                       # for p in vars(location[1]):
+                            #if p == player.p_pnum:
+                                ###
+                      ## var flip??!!??!! ale jest 4.   
 
-        def hide_player(self, tile):
-            tile.p_pnum = False
+                    
+
+        # def hide_player(self, tile):
+        #     tile.p_pnum = False
 
 
-        def player_present(self):
-            for player in self.players:
-                for tile in locations.loci:
-                    if player.location == locations.loci[0]: #na przykład tak. Jeszcze nie ma tej zmiennej
-                        tile.tile_flip()
-                        show_player(tile)
+        # def player_present(self):
+        #     for player in self.players:
+        #         for tile in locations.loci:
+        #             if player.location == locations.loci[0]: #na przykład tak. Jeszcze nie ma tej zmiennej
+        #                 tile.tile_flip()
+        #                 show_player(tile)
 
-    
+
         def play(self):
             round_count = 0
             while round_count < 2:
 
                 for player in self.players:
-                    print(player.name, "points:", player.score)
+                    print(player.p_pnum, player.name, "points:", player.score)
                     player.location = '3c' #ok
                     print(player.location)
-                self.show_players()
+            
                 # print(self.players)
                 #print(self.locations.loci)
            #     self.player_update()
                 print(self.locations.grid)
-                self.locations.loci[0][1].vis = True
-                self.locations.loci[3][1].p2 = True
+            
                 round_count +=1 #ok
-
-        
+                self.show_players()
+    
 
 
     def main(): # rewrite all vars!
