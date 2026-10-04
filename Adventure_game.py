@@ -14,6 +14,9 @@ def _(i):
     # if_player should be added to dictionary, based on location. Can I edit the dict value? 
     # my_dict.update({'key1': 'value1', 'key2': 'value2'})
 
+    # attr = "age"
+    # vars(p)[attr] = 40
+
     #lg('2a')
     # for key, value in locations.items():
     #     print(f"{key}: {value}")
@@ -65,27 +68,12 @@ def _(i):
             self._location = location
             return self._location
 
-        # def move(self, direction =  None, roll = 2):
+        def dice_roll(self):
+            roll = random.randint(1 , 4)
+            print(self.name, "rolls:", roll)
+            return roll
 
-        #     while direction not in ["u", "d", "l", "r"]:
-        #         direction = input("""Which direction do you want to move?
-        #         "u" - up
-        #         "d" - down
-        #         "l" - left
-        #         "r" - right
-        #         ...?""")
-        #         return direction
 
-        #     if direction == "u":
-        #         self.loc = self.loci.locations[1][-roll * 5]  # to jest zła składnia
-        #     if direction == "d":
-        #         self.loc = self.loci.locations[1][+roll * 5]  # to jest zła składnia
-        #     if direction == "l":
-        #         self.loc = self.loci.locations[1][-roll]  # to jest zła składnia
-        #     if direction == "r":
-        #         self.loc = self.loci.locations[1][+roll]  # to jest zła składnia
-
-        #     return self.loc
     class Tile(object):
 
         def __init__(self, i, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
@@ -96,7 +84,7 @@ def _(i):
             self.p3 = p3
             self.p4 = p4
    
-    
+
 
         @property
         def tile(self, p1 = False, p2 = False, p3 = False, p4 = False, vis = False):
@@ -113,14 +101,6 @@ def _(i):
 
         def tile_flip(self):
             self.vis = True
-
-
-        # def show_player(self):
-        #     self.p1 = p1
-        #     self.p2 = p2
-        #     self.p3 = p3
-        #     self.p4 = p4
-
 
     # Ściąga z czata
     # class Element:
@@ -170,10 +150,7 @@ def _(i):
 
             lc = self.loci
 
-    
 
-    
-    # Zmień reprezentację 'i' warunek i vis. 
 
             grid = (f"""
                 |- - - -|- - - -|- - - -|- - - -|- - - -|
@@ -206,39 +183,41 @@ def _(i):
             self.locations = Locations()
             self.players = players
 
-        # def player_update(self):
-        #     for loc in self.loci.locations[0].keys(): #ok
-        #         for player in self.players:
-        #             if loc == player.location:
-        #                 print(player.name, "found!", loc)
-        #                 self.loci.locations[0].get(f'{loc}') # nie działa
-        #                 # update inaczej!!!
-        #                 print(self.loci.locations[0][loc])
-
-
 
         def show_players(self):
             for player in self.players:
                 for location in self.locations.loci:
                     if (player.location) == (location[0]):
                         location[1].tile_flip()
-                       # for p in vars(location[1]):
-                            #if p == player.p_pnum:
-                                ###
-                      ## var flip??!!??!! ale jest 4.   
+                        xx = player.p_pnum
+                        vars(location[1])[xx] = True
 
                     
+        def move_players(self):
+            for player in self.players:
+                direction = None
+                while direction not in ["u", "d", "l", "r"]:
+                    direction = input(f"""{player.name} Which direction do you want to move?
+                    "u" - up
+                    "d" - down
+                    "l" - left
+                    "r" - right
+                    ...?""").lower()
+                
+                roll = player.dice_roll()
+                print(player.name, "wyrzuca na kości:", roll, "idzie w kierunku:", direction)
+                if direction == "u":
+                    print(player.location, 'zmiana w górę') # = self.locations.loc_numbers[1][-roll * 5]  # to jest zła składnia
+                if direction == "d":
+                    print(player.location, 'zmiana w dół') #self.loci.locations[1][+roll * 5]  # to jest zła składnia
+                if direction == "l":
+                    print(player.location, 'zmiana w lewo') # to jest zła składnia
+                if direction == "r":
+                    print(player.location, 'zmiana w prawo')  # to jest zła składnia
 
-        # def hide_player(self, tile):
-        #     tile.p_pnum = False
+        #     return self.loc               
 
-
-        # def player_present(self):
-        #     for player in self.players:
-        #         for tile in locations.loci:
-        #             if player.location == locations.loci[0]: #na przykład tak. Jeszcze nie ma tej zmiennej
-        #                 tile.tile_flip()
-        #                 show_player(tile)
+    
 
 
         def play(self):
@@ -249,15 +228,13 @@ def _(i):
                     print(player.p_pnum, player.name, "points:", player.score)
                     player.location = '3c' #ok
                     print(player.location)
-            
-                # print(self.players)
-                #print(self.locations.loci)
-           #     self.player_update()
+        
                 print(self.locations.grid)
-            
+                self.show_players()
+                self.move_players()
                 round_count +=1 #ok
                 self.show_players()
-    
+
 
 
     def main(): # rewrite all vars!
@@ -276,7 +253,7 @@ def _(i):
 
             players.append(player)
 
-        print(players)
+        print("players: ", players)
         game = Game(players)
 
         again = None
