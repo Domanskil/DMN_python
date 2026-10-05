@@ -69,7 +69,7 @@ def _(i):
             return self._location
 
         def dice_roll(self):
-            roll = random.randint(1 , 4)
+            roll = random.randint(1 , 3)
             print(self.name, "rolls:", roll)
             return roll
 
@@ -182,7 +182,8 @@ def _(i):
 
             self.locations = Locations()
             self.players = players
-
+            for player in self.players:
+                player.location = '3c'
 
         def show_players(self):
             for player in self.players:
@@ -192,7 +193,7 @@ def _(i):
                         xx = player.p_pnum
                         vars(location[1])[xx] = True
 
-                    
+                
         def move_players(self):
             for player in self.players:
                 direction = None
@@ -203,11 +204,17 @@ def _(i):
                     "l" - left
                     "r" - right
                     ...?""").lower()
-                
+            
                 roll = player.dice_roll()
                 print(player.name, "wyrzuca na kości:", roll, "idzie w kierunku:", direction)
                 if direction == "u":
                     print(player.location, 'zmiana w górę') # = self.locations.loc_numbers[1][-roll * 5]  # to jest zła składnia
+                    y = int(str(player.location)[0]) if (int(str(player.location)[0]) - roll) < 1 else int(str(player.location)[0]) - roll
+                    if y - roll < 1:
+                        print("Roll too high. You can't go in this direction")
+                    x = str(player.location)[1]
+                    player.location = (str(y) + str(x))
+                    print('new location:', player.location)
                 if direction == "d":
                     print(player.location, 'zmiana w dół') #self.loci.locations[1][+roll * 5]  # to jest zła składnia
                 if direction == "l":
@@ -217,7 +224,7 @@ def _(i):
 
         #     return self.loc               
 
-    
+
 
 
         def play(self):
@@ -226,12 +233,13 @@ def _(i):
 
                 for player in self.players:
                     print(player.p_pnum, player.name, "points:", player.score)
-                    player.location = '3c' #ok
                     print(player.location)
-        
-                print(self.locations.grid)
+    
+            
                 self.show_players()
+                print(self.locations.grid)
                 self.move_players()
+                print(self.locations.grid)
                 round_count +=1 #ok
                 self.show_players()
 
