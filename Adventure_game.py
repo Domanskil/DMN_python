@@ -193,7 +193,7 @@ def _(i):
                         xx = player.p_pnum
                         vars(location[1])[xx] = True
 
-                
+            
         def move_players(self):
             for player in self.players:
                 direction = None
@@ -204,11 +204,11 @@ def _(i):
                     "l" - left
                     "r" - right
                     ...?""").lower()
-            
+        
                 roll = player.dice_roll()
                 print(player.name, "wyrzuca na kości:", roll, "idzie w kierunku:", direction)
                 if direction == "u":
-                    print(player.location, 'zmiana w górę') # = self.locations.loc_numbers[1][-roll * 5]  # to jest zła składnia
+                    print(player.location, 'zmiana w górę')
                     y = int(str(player.location)[0]) if (int(str(player.location)[0]) - roll) < 1 else int(str(player.location)[0]) - roll
                     if y - roll < 1:
                         print("Roll too high. You can't go in this direction")
@@ -218,7 +218,25 @@ def _(i):
                 if direction == "d":
                     print(player.location, 'zmiana w dół') #self.loci.locations[1][+roll * 5]  # to jest zła składnia
                 if direction == "l":
-                    print(player.location, 'zmiana w lewo') # to jest zła składnia
+                    print(player.location, 'zmiana w lewo')
+                    x_list = ['a', 'b', 'c', 'd', 'e']
+                    y = str(player.location)[0]
+                    x_num = 0
+                    x = str(player.location)[1]
+                    for xx in x_list:
+                        if xx != str(player.location)[1]:
+                            x_num += 1
+                            print('xx:', xx)
+                            print('tu powinno być c:', str(player.location)[1])
+                        else:
+                            print('x rowny', x_num)
+                            return x
+                        print('x rowny', x_num)
+                        x = x_list[(x_num - roll)] if (x_num - roll) > -1 else x
+                        print('nowy x:', x)
+                    
+
+                
                 if direction == "r":
                     print(player.location, 'zmiana w prawo')  # to jest zła składnia
 
@@ -234,8 +252,8 @@ def _(i):
                 for player in self.players:
                     print(player.p_pnum, player.name, "points:", player.score)
                     print(player.location)
-    
-            
+
+        
                 self.show_players()
                 print(self.locations.grid)
                 self.move_players()
