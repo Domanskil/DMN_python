@@ -193,7 +193,7 @@ def _(i):
                         xx = player.p_pnum
                         vars(location[1])[xx] = True
 
-            
+        
         def move_players(self):
             for player in self.players:
                 direction = None
@@ -204,7 +204,7 @@ def _(i):
                     "l" - left
                     "r" - right
                     ...?""").lower()
-        
+    
                 roll = player.dice_roll()
                 print(player.name, "wyrzuca na kości:", roll, "idzie w kierunku:", direction)
                 if direction == "u":
@@ -221,22 +221,26 @@ def _(i):
                     print(player.location, 'zmiana w lewo')
                     x_list = ['a', 'b', 'c', 'd', 'e']
                     y = str(player.location)[0]
-                    x_num = 0
+                    xx = 0
                     x = str(player.location)[1]
-                    for xx in x_list:
-                        if xx != str(player.location)[1]:
-                            x_num += 1
-                            print('xx:', xx)
-                            print('tu powinno być c:', str(player.location)[1])
-                        else:
-                            print('x rowny', x_num)
-                            return x
-                        print('x rowny', x_num)
-                        x = x_list[(x_num - roll)] if (x_num - roll) > -1 else x
-                        print('nowy x:', x)
+                    while str(player.location)[xx] != x:
+                        print('xx:', xx)
+                        print('tu powinno być c:', x)
+                        xx += 1
                     
+                        return xx
+                        print('aaaa', xx)
+                    
+                        xx = xx if (roll > xx) else xx - roll
+                    
+                        print('bbb')
+                    x = x_list[xx]
+                    print('nowy x:', x)
+                    player.location = y + str(x)
+                    print('ccc')
+                    print('new location:', player.location)
 
-                
+            
                 if direction == "r":
                     print(player.location, 'zmiana w prawo')  # to jest zła składnia
 
@@ -253,7 +257,7 @@ def _(i):
                     print(player.p_pnum, player.name, "points:", player.score)
                     print(player.location)
 
-        
+    
                 self.show_players()
                 print(self.locations.grid)
                 self.move_players()
