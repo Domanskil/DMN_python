@@ -102,24 +102,6 @@ def _(i):
         def tile_flip(self):
             self.vis = True
 
-    # Ściąga z czata
-    # class Element:
-    #     def __init__(self, hp):
-    #         self.hp = hp
-
-
-    # class Plansza:
-    #     def __init__(self):
-    #         self.pola = [
-    #             [Element(100), Element(100), Element(100)],
-    #             [Element(100), Element(100), Element(100)],
-    #             [Element(100), Element(100), Element(100)]
-    #         ]
-
-    # plansza = Plansza()
-
-    # plansza.pola[1][2].hp = 50
-
 
     class Locations(object): 
         """game grid"""
@@ -153,22 +135,22 @@ def _(i):
 
 
             grid = (f"""
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
                 |{lc[0][0]}-{lc[0][1].i if lc[0][1].vis else "X"}  -|{lc[1][0]}-{lc[1][1].i if lc[1][1].vis else "X"}  -|{lc[2][0]}-{lc[2][1].i if lc[2][1].vis else "X"}  -|{lc[3][0]}-{lc[3][1].i if lc[3][1].vis else "X"}  -|{lc[4][0]}-{lc[4][1].i if lc[4][1].vis else "X"}  -| 
                 |{' ' if not lc[0][1].p1 else "A"}-{' ' if not lc[0][1].p2 else "B"}-{' ' if not lc[0][1].p3 else "C"}-{' ' if not lc[0][1].p4 else "D"}|{' ' if not lc[1][1].p1 else "A"}-{' ' if not lc[1][1].p2 else "B"}-{' ' if not lc[1][1].p3 else "C"}-{' ' if not lc[1][1].p4 else "D"}|{' ' if not lc[2][1].p1 else "A"}-{' ' if not lc[2][1].p2 else "B"}-{' ' if not lc[2][1].p3 else "C"}-{' ' if not lc[2][1].p4 else "D"}|{' ' if not lc[3][1].p1 else "A"}-{' ' if not lc[3][1].p2 else "B"}-{' ' if not lc[3][1].p3 else "C"}-{' ' if not lc[3][1].p4 else "D"}|{' ' if not lc[4][1].p1 else "A"}-{' ' if not lc[4][1].p2 else "B"}-{' ' if not lc[4][1].p3 else "C"}-{' ' if not lc[4][1].p4 else "D"}|
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
                 |{lc[5][0]}-{lc[5][1].i if lc[5][1].vis else "X"}  -|{lc[6][0]}-{lc[6][1].i if lc[6][1].vis else "X"}  -|{lc[7][0]}-{lc[7][1].i if lc[7][1].vis else "X"}  -|{lc[8][0]}-{lc[8][1].i if lc[8][1].vis else "X"}  -|{lc[9][0]}-{lc[9][1].i if lc[9][1].vis else "X"}  -| 
                 |{' ' if not lc[5][1].p1 else "A"}-{' ' if not lc[5][1].p2 else "B"}-{' ' if not lc[5][1].p3 else "C"}-{' ' if not lc[5][1].p4 else "D"}|{' ' if not lc[6][1].p1 else "A"}-{' ' if not lc[6][1].p2 else "B"}-{' ' if not lc[6][1].p3 else "C"}-{' ' if not lc[6][1].p4 else "D"}|{' ' if not lc[7][1].p1 else "A"}-{' ' if not lc[7][1].p2 else "B"}-{' ' if not lc[7][1].p3 else "C"}-{' ' if not lc[7][1].p4 else "D"}|{' ' if not lc[8][1].p1 else "A"}-{' ' if not lc[8][1].p2 else "B"}-{' ' if not lc[8][1].p3 else "C"}-{' ' if not lc[8][1].p4 else "D"}|{' ' if not lc[9][1].p1 else "A"}-{' ' if not lc[9][1].p2 else "B"}-{' ' if not lc[9][1].p3 else "C"}-{' ' if not lc[9][1].p4 else "D"}|
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
                 |{lc[10][0]}-{lc[10][1].i if lc[10][1].vis else "X"}  -|{lc[11][0]}-{lc[11][1].i if lc[11][1].vis else "X"}  -|{lc[12][0]}-{lc[12][1].i if lc[12][1].vis else "X"}  -|{lc[13][0]}-{lc[13][1].i if lc[13][1].vis else "X"}  -|{lc[14][0]}-{lc[14][1].i if lc[14][1].vis else "X"}  -| 
                 |{' ' if not lc[10][1].p1 else "A"}-{' ' if not lc[10][1].p2 else "B"}-{' ' if not lc[10][1].p3 else "C"}-{' ' if not lc[10][1].p4 else "D"}|{' ' if not lc[11][1].p1 else "A"}-{' ' if not lc[11][1].p2 else "B"}-{' ' if not lc[11][1].p3 else "C"}-{' ' if not lc[11][1].p4 else "D"}|{' ' if not lc[12][1].p1 else "A"}-{' ' if not lc[12][1].p2 else "B"}-{' ' if not lc[12][1].p3 else "C"}-{' ' if not lc[12][1].p4 else "D"}|{' ' if not lc[13][1].p1 else "A"}-{' ' if not lc[13][1].p2 else "B"}-{' ' if not lc[13][1].p3 else "C"}-{' ' if not lc[13][1].p4 else "D"}|{' ' if not lc[14][1].p1 else "A"}-{' ' if not lc[14][1].p2 else "B"}-{' ' if not lc[14][1].p3 else "C"}-{' ' if not lc[14][1].p4 else "D"}|
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
                 |{lc[15][0]}-{lc[15][1].i if lc[15][1].vis else "X"}  -|{lc[16][0]}-{lc[16][1].i if lc[16][1].vis else "X"}  -|{lc[17][0]}-{lc[17][1].i if lc[17][1].vis else "X"}  -|{lc[18][0]}-{lc[18][1].i if lc[18][1].vis else "X"}  -|{lc[19][0]}-{lc[19][1].i if lc[19][1].vis else "X"}  -| 
                 |{' ' if not lc[15][1].p1 else "A"}-{' ' if not lc[15][1].p2 else "B"}-{' ' if not lc[15][1].p3 else "C"}-{' ' if not lc[15][1].p4 else "D"}|{' ' if not lc[16][1].p1 else "A"}-{' ' if not lc[16][1].p2 else "B"}-{' ' if not lc[16][1].p3 else "C"}-{' ' if not lc[16][1].p4 else "D"}|{' ' if not lc[17][1].p1 else "A"}-{' ' if not lc[17][1].p2 else "B"}-{' ' if not lc[17][1].p3 else "C"}-{' ' if not lc[17][1].p4 else "D"}|{' ' if not lc[18][1].p1 else "A"}-{' ' if not lc[18][1].p2 else "B"}-{' ' if not lc[18][1].p3 else "C"}-{' ' if not lc[18][1].p4 else "D"}|{' ' if not lc[19][1].p1 else "A"}-{' ' if not lc[19][1].p2 else "B"}-{' ' if not lc[19][1].p3 else "C"}-{' ' if not lc[19][1].p4 else "D"}|
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
                 |{lc[20][0]}-{lc[20][1].i if lc[20][1].vis else "X"}  -|{lc[21][0]}-{lc[21][1].i if lc[21][1].vis else "X"}  -|{lc[22][0]}-{lc[22][1].i if lc[22][1].vis else "X"}  -|{lc[23][0]}-{lc[23][1].i if lc[23][1].vis else "X"}  -|{lc[24][0]}-{lc[24][1].i if lc[24][1].vis else "X"}  -| 
                 |{' ' if not lc[20][1].p1 else "A"}-{' ' if not lc[20][1].p2 else "B"}-{' ' if not lc[20][1].p3 else "C"}-{' ' if not lc[20][1].p4 else "D"}|{' ' if not lc[21][1].p1 else "A"}-{' ' if not lc[21][1].p2 else "B"}-{' ' if not lc[21][1].p3 else "C"}-{' ' if not lc[21][1].p4 else "D"}|{' ' if not lc[22][1].p1 else "A"}-{' ' if not lc[22][1].p2 else "B"}-{' ' if not lc[22][1].p3 else "C"}-{' ' if not lc[22][1].p4 else "D"}|{' ' if not lc[23][1].p1 else "A"}-{' ' if not lc[23][1].p2 else "B"}-{' ' if not lc[23][1].p3 else "C"}-{' ' if not lc[23][1].p4 else "D"}|{' ' if not lc[24][1].p1 else "A"}-{' ' if not lc[24][1].p2 else "B"}-{' ' if not lc[24][1].p3 else "C"}-{' ' if not lc[24][1].p4 else "D"}|
-                |- - - -|- - - -|- - - -|- - - -|- - - -|
+                |-------|-------|-------|-------|-------|
 
             """)
 
@@ -176,7 +158,7 @@ def _(i):
 
 
 
-    class Game(object): #rewrite all vars!
+    class Game(object): 
 
         def __init__(self, players):
 
@@ -193,7 +175,7 @@ def _(i):
                         xx = player.p_pnum
                         vars(location[1])[xx] = True
 
-    
+
         def move_players(self):
             for player in self.players:
                 direction = None
@@ -206,17 +188,36 @@ def _(i):
                     ...?""").lower()
 
                 roll = player.dice_roll()
-                print(player.name, "wyrzuca na kości:", roll, "idzie w kierunku:", direction)
+                print(player.name, "rolls:", roll, "chooses direction:", direction)
+            
                 if direction == "u":
                     print(player.location, 'zmiana w górę')
-                    y = int(str(player.location[0])) if (int(str(player.location[0])) - roll) < 1 else int(str(player.location[0])) - roll
+                    y = int(str(player.location[0])) 
+                    x = str(player.location[1])
                     if y - roll < 1:
                         print("Roll too high. You can't go in this direction")
-                    x = str(player.location[1])
-                    player.location = (str(y) + str(x))
+                    else:
+                        y = y - roll
+                        player.location = (str(y) + str(x))
+                        for location in self.locations.loci:
+                            if player.location == location[0]:
+                                player.score = player.score + int(location[1].i)
                     print('new location:', player.location)
+            
                 if direction == "d":
-                    print(player.location, 'zmiana w dół') #self.loci.locations[1][+roll * 5]  # to jest zła składnia
+                    print(player.location, 'zmiana w dół')
+                    y = int(str(player.location[0])) 
+                    x = str(player.location[1])
+                    if y + roll > 5:
+                        print("Roll too high. You can't go in this direction")
+                    else:
+                        y = y + roll
+                        player.location = (str(y) + str(x))
+                        for location in self.locations.loci:
+                            if player.location == location[0]:
+                                player.score = player.score + int(location[1].i)
+                    print('new location:', player.location)
+            
                 if direction == "l":
                     print(player.location, 'zmiana w lewo')
                     x_list = ['a', 'b', 'c', 'd', 'e']
@@ -226,64 +227,74 @@ def _(i):
                     if roll > x_num:
                         print("Roll too high. You can't go in this direction")
                     else:
-                        x = str(player.location[(x_num - roll)])
-
-                
-                
-                    #x = x if roll > x_num else str(player.location[x_num])
-                    print('bbb')
-                
-                    player.location = y + x
-                    print('ccc')
+                        x = str(x_list[(x_num - roll)])
+                        player.location = str(y + x)
+                        for location in self.locations.loci:
+                            if player.location == location[0]:
+                                player.score = player.score + int(location[1].i)
                     print('new location:', player.location)
 
-        
+    
                 if direction == "r":
-                    print(player.location, 'zmiana w prawo')  # to jest zła składnia
+                    print(player.location, 'zmiana w prawo')
+                    x_list = ['a', 'b', 'c', 'd', 'e']
+                    y = str(player.location[0])
+                    x = str(player.location[1])
+                    x_num = x_list.index(x)
+                    if roll > 4 - x_num:
+                        print("Roll too high. You can't go in this direction")
+                    else:
+                        x = str(x_list[(x_num + roll)])
+                        player.location = str(y + x)
+                        for location in self.locations.loci:
+                            if player.location == location[0]:
+                                player.score = player.score + int(location[1].i)
+                    print('new location:', player.location)
 
-    # return self.loc               
-
-    # if x in my_list:
-    #     print("yes")
-    # print(my_list.index(x))
-
-
-
-        def play(self):
-            round_count = 0
-            while round_count < 2:
 
                 for player in self.players:
-                    print(player.p_pnum, player.name, "points:", player.score)
-                    print(player.location)
+                    for location in self.locations.loci:
+                        if location[1].vis:
+                            xx = player.p_pnum
+                            vars(location[1])[xx] = False
 
+            
+        
+        def play(self):
+            round_count = 0
+            while round_count < 5:
 
-                self.show_players()
-                print(self.locations.grid)
+                for player in self.players:
+                    print("Player:", player.p_pnum, player.name, "points:", player.score, "location:", player.location)
+              
                 self.move_players()
-                print(self.locations.grid)
                 round_count +=1 #ok
                 self.show_players()
-
-
-
-    def main(): # rewrite all vars!
-
-
-   
-
-
+                print(self.locations.grid)
+            
+            for player in self.players:
+                    print("Player:", player.p_pnum, player.name, "points:", player.score, "location:", player.location)
+        
+            totals = []
+            for player in self.players:
+                totals.append(player.score)
+            totals.sort(reverse = True)
+            for player in self.players:
+                if player.score == totals[0]:
+                    print(player.name, "wins!")
+        
+    def main(): 
 
         players = []
         num_players = None
-        while num_players not in range(2,4):
+        while num_players not in range(2,5):
             num_players = int(input("How many players are there? (2-4):"))
         for i in range(1 , num_players+1):
             player = Player(name = input(f"What is the {i}. player's name?:"), p_number = i)
 
             players.append(player)
 
-        print("players: ", players)
+        #print("players: ", players)
         game = Game(players)
 
         again = None
